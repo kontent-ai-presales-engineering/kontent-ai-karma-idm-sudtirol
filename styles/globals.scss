@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'type';
+@import './components/hero-unit';
+@import './components/events';
+@import './products';
+
+// Modifying pre-flights base styles
+@layer base {
+  html {
+    --scroll-behavior: smooth;
+    scroll-behavior: smooth;
+  }
+  .component {
+    &_full-width {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+    }
+  }
+
+  .primary-bg-gradient {
+    @apply bg-gradient-to-tl from-rose-950 to-manufacturing-dark;
+  }
+}

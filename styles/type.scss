@@ -1,0 +1,13 @@
+@layer base {
+  .heading a {
+    @apply scroll-m-40 no-underline;
+
+    &:hover {
+      @apply text-rose-800;
+    }
+
+    &.fact {
+      @apply border-none -ml-8;
+    }
+  }
+}
