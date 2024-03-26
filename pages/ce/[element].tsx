@@ -6,6 +6,7 @@ import { HubspotFormsCustomElement } from "../../components/custom-elements/hubs
 import { FocalPointCustomElement } from "../../components/custom-elements/focal-point";
 import Head from "next/head";
 import { ExportCustomElement } from "../../components/custom-elements/export";
+import { ReadOnlyCustomElement } from "../../components/custom-elements/read-only";
 
 interface IProps {
     elementComponent: string
@@ -61,6 +62,9 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
             case "hubspotforms":
                 customElement = <HubspotFormsCustomElement element={element} context={context} handleSave={handleSave} value={value} />
                 break;
+            case "read-only":
+                customElement = <ReadOnlyCustomElement value={value} />
+                break;
             default:
                 customElement = <div><p>Custom element no configured in code</p></div>
                 break;
@@ -73,8 +77,7 @@ const CustomElementTest: NextPage<IProps> = ({ elementComponent }) => {
     return (
         <>
             <Head>
-                <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
-                <script src="../focal-point.js"></script>
+                <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js" async></script>
             </Head>
             <div>
                 <div ref={ref}>
@@ -90,10 +93,10 @@ export const getStaticPaths: GetStaticPaths = async (params) => {
     return {
         paths: [
             '/ce/translation',
-            '/ce/twitter',
-            '/ce/instagram',
             '/ce/hubspotforms',
             '/ce/export',
+            '/ce/focal-point',
+            '/ce/read-only',
         ],
         fallback: false
     }

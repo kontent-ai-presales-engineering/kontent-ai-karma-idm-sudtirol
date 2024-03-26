@@ -501,6 +501,29 @@ export const contentTypes = {
     },
 
     /**
+     *     Data export module
+     */
+    _data_export_module: {
+        codename: '_data_export_module',
+        id: '349e975e-6b47-4faf-8020-e234cc600f89',
+        externalId: undefined,
+        name: '🗃️ Data export module',
+        elements: {
+            /**
+             * Export data (custom)
+             */
+            export_data: {
+                codename: 'export_data',
+                id: '16589305-3f32-4a34-a231-f07f51d50781',
+                externalId: undefined,
+                name: 'Export data',
+                required: false,
+                type: 'custom'
+            }
+        }
+    },
+
+    /**
      * Article
      */
     article: {
@@ -1813,6 +1836,18 @@ export const contentTypes = {
             },
 
             /**
+             * Focal point (custom)
+             */
+            focal_point: {
+                codename: 'focal_point',
+                id: '7ac42b8d-3ab2-4188-8688-6ae8e9226a8e',
+                externalId: undefined,
+                name: 'Focal point',
+                required: false,
+                type: 'custom'
+            },
+
+            /**
              * Heading (text)
              */
             heading: {
@@ -1860,6 +1895,18 @@ export const contentTypes = {
                         externalId: undefined
                     }
                 }
+            },
+
+            /**
+             * Personas (taxonomy)
+             */
+            personas: {
+                codename: 'personas',
+                id: '8fb3fbc7-1178-44f7-b476-5221bb7920c9',
+                externalId: undefined,
+                name: 'Personas',
+                required: false,
+                type: 'taxonomy'
             }
         }
     },
@@ -1930,6 +1977,29 @@ export const contentTypes = {
                 name: 'Milestones',
                 required: false,
                 type: 'modular_content'
+            }
+        }
+    },
+
+    /**
+     * New content type
+     */
+    new_content_type: {
+        codename: 'new_content_type',
+        id: 'b5a6f10b-83dd-43cd-81a4-90168ede7292',
+        externalId: undefined,
+        name: 'New content type',
+        elements: {
+            /**
+             * Title (text)
+             */
+            title: {
+                codename: 'title',
+                id: 'b93ec202-0921-4496-943d-a3f815dc54b0',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text'
             }
         }
     },

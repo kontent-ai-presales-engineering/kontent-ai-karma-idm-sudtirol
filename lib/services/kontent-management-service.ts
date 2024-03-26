@@ -2,7 +2,7 @@ import { collections } from './../../models/project/collections';
 import { roles } from './../../models/project/roles';
 import { LanguageVariantElements, LanguageVariantModels, LanguageVariantResponses, ManagementClient } from "@kontent-ai/management-sdk";
 import { SavedValue } from "../../components/custom-elements/translation";
-import { contentTypes } from '../../models';
+import { contentTypes, workflows } from '../../models';
 
 export default class KontentManagementService {
   public readonly defaultLanguageId = '00000000-0000-0000-0000-000000000000'
@@ -127,7 +127,22 @@ export default class KontentManagementService {
         name: contentItemName,
         type: {
           codename: contentTypeCodename
+        },
+        collection: {
+          codename: 'sandbox'
         }
+      })
+      .toPromise()
+    return response.data
+  }
+
+  public async updateContentItem(contentItemName: string, contentItemId: string) {
+    const client = KontentManagementService.createKontentManagementClient()
+    const response = await client
+      .updateContentItem()
+      .byItemId(contentItemId)
+      .withData({
+        name: contentItemName
       })
       .toPromise()
     return response.data
@@ -146,6 +161,16 @@ export default class KontentManagementService {
       })
       .toPromise()
     return response.data
+  }
+
+  public async unpublishLanguageVariant(contentItemId: string, languageId: string) {
+    const client = KontentManagementService.createKontentManagementClient()
+    await client
+      .unpublishLanguageVariant()
+      .byItemId(contentItemId)
+      .byLanguageId(languageId)
+      .withoutData()
+      .toPromise()
   }
 
   public async changeLanguageVariantWorkflowStep(contentItemId: string, languageId: string, workflowStep: string, workflowId: string) {
@@ -193,6 +218,15 @@ export default class KontentManagementService {
           elements: elements
         }
       })
+      .toPromise()
+  }
+
+  public async createNewVersionOfLanguageVariant(itemId: string, languageId: string): Promise<void> {
+    const client = KontentManagementService.createKontentManagementClient()
+    await client
+      .createNewVersionOfLanguageVariant()
+      .byItemId(itemId)
+      .byLanguageId(languageId)
       .toPromise()
   }
 
