@@ -30,12 +30,12 @@ export const TeamSectionComponent: FC<Props> = (props) => {
               language={props.item.system.language}
             /></p>
         </div>
-        <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+        <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2 list-none"
           {...createElementSmartLink(
             contentTypes.team_section.elements.team_members.codename
           )}
           {...createFixedAddSmartLink('end')}>
-          {props.item.elements.teamMembers.linkedItems.map((teamMember) => (
+          {props.item.elements.teamMembers.linkedItems ? props.item.elements.teamMembers.linkedItems?.map((teamMember) => (
             <li
               key={teamMember.system.id}
               {...createItemSmartLink(
@@ -43,14 +43,14 @@ export const TeamSectionComponent: FC<Props> = (props) => {
                 teamMember.system.name
               )}>
               <div className="flex items-center gap-x-6">
-                <img className="h-16 w-16 rounded-full" src={teamMember.elements.photograph.value[0].url} alt={teamMember.elements.photograph.value[0].description} />
+                <img className="h-16 w-16 rounded-full" src={teamMember.elements.photograph.value[0]?.url} alt={teamMember.elements.photograph.value[0]?.description} />
                 <div>
-                  <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">{teamMember.elements.firstName.value} {teamMember.elements.lastName.value}</h3>
-                  <p className="text-sm font-semibold leading-6 text-indigo-600">{teamMember.elements.occupation.value}</p>
+                  <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">{teamMember.elements.firstName?.value} {teamMember.elements.lastName?.value}</h3>
+                  <p className="text-sm font-semibold leading-6 text-indigo-600">{teamMember.elements.occupation?.value}</p>
                 </div>
               </div>
             </li>
-          ))}
+          )) : ""}
         </ul>
       </div>
     </div>
