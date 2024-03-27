@@ -32,6 +32,7 @@ import {
   ProductListing,
   PanelListing,
   MilestoneListing,
+  TeamSection,
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
@@ -52,6 +53,7 @@ import { BuildError } from '../ui/BuildError';
 import { sanitizeFirstChildText } from '../../../lib/anchors';
 import { siteCodename } from '../../../lib/utils/env';
 import { ContentChunkComponent } from '../ContentChunk';
+import { TeamSectionComponent } from '../TeamSection';
 
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
@@ -137,9 +139,9 @@ export const createDefaultResolvers = (
           );
         case contentTypes.hero_unit.codename:
           return (
-            <HeroUnitComponent 
-              item={componentItem as HeroUnit} 
-              />
+            <HeroUnitComponent
+              item={componentItem as HeroUnit}
+            />
           );
         case contentTypes.article_listing.codename:
           return (
@@ -188,6 +190,10 @@ export const createDefaultResolvers = (
         case contentTypes.panel_listing.codename:
           return (
             <PanelListingComponent item={componentItem as PanelListing} />
+          );
+        case contentTypes.team_section.codename:
+          return (
+            <TeamSectionComponent item={componentItem as TeamSection} />
           );
         default:
           return (

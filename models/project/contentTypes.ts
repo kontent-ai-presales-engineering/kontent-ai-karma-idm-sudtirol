@@ -1982,29 +1982,6 @@ export const contentTypes = {
     },
 
     /**
-     * New content type
-     */
-    new_content_type: {
-        codename: 'new_content_type',
-        id: 'b5a6f10b-83dd-43cd-81a4-90168ede7292',
-        externalId: undefined,
-        name: 'New content type',
-        elements: {
-            /**
-             * Title (text)
-             */
-            title: {
-                codename: 'title',
-                id: 'b93ec202-0921-4496-943d-a3f815dc54b0',
-                externalId: undefined,
-                name: 'Title',
-                required: false,
-                type: 'text'
-            }
-        }
-    },
-
-    /**
      * Panel
      */
     _panel: {
@@ -2575,6 +2552,53 @@ export const contentTypes = {
                 name: 'Translation',
                 required: false,
                 type: 'custom'
+            }
+        }
+    },
+
+    /**
+     * Team Section
+     */
+    team_section: {
+        codename: 'team_section',
+        id: '6e41e5a9-8d6d-42b9-b810-18c89cb7efde',
+        externalId: undefined,
+        name: 'Team Section',
+        elements: {
+            /**
+             * Description (rich_text)
+             */
+            description: {
+                codename: 'description',
+                id: '74cd4131-5482-474b-94ec-8890451262f9',
+                externalId: undefined,
+                name: 'Description',
+                required: false,
+                type: 'rich_text'
+            },
+
+            /**
+             * Team members (modular_content)
+             */
+            team_members: {
+                codename: 'team_members',
+                id: '0402cb26-34ab-4b71-af80-e12b7a5ced89',
+                externalId: undefined,
+                name: 'Team members',
+                required: false,
+                type: 'modular_content'
+            },
+
+            /**
+             * Title (text)
+             */
+            title: {
+                codename: 'title',
+                id: 'aa9960fe-6dfd-4b57-beab-9d8f691927ad',
+                externalId: undefined,
+                name: 'Title',
+                required: false,
+                type: 'text'
             }
         }
     },
