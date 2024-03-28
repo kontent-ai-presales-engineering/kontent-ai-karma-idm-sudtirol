@@ -32,7 +32,6 @@ import {
   ProductListing,
   PanelListing,
   MilestoneListing,
-  TeamSection,
 } from '../../../models';
 import { InternalLink } from '../internalLinks/InternalLink';
 import { TestimonialComponent } from '../Testimonial';
@@ -53,8 +52,6 @@ import { BuildError } from '../ui/BuildError';
 import { sanitizeFirstChildText } from '../../../lib/anchors';
 import { siteCodename } from '../../../lib/utils/env';
 import { ContentChunkComponent } from '../ContentChunk';
-import { TeamSectionComponent } from '../TeamSection';
-
 type ElementProps = Readonly<{
   element: Elements.RichTextElement;
   isInsideTable: boolean;
