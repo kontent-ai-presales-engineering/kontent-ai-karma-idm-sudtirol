@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
 import React, { FC, useContext } from 'react';
-import { PreviewContext } from '../../contexts/PreviewContext';
-import { getEnvIdFromCookie } from '../../../lib/utils/pageUtils';
 import { defaultEnvId } from '../../../lib/utils/env';
 
 type Props = Readonly<{
@@ -10,17 +8,13 @@ type Props = Readonly<{
 
 export const PreviewSwitcher: FC<Props> = (props) => {
   const router = useRouter();
-
-  const envId = getEnvIdFromCookie();
   if (props.isPreview) {
     return (
       <div className='relative inline-block text-left m-3'>
         <div>
           <a
             className={`btn shadow-none`}
-            href={`/${
-              envId ? envId : defaultEnvId
-            }/api/exit-preview?callback=${encodeURIComponent(
+            href={`/api/exit-preview?callback=${encodeURIComponent(
               router.asPath
             )}`}
             data-te-toggle='tooltip'
@@ -49,9 +43,7 @@ export const PreviewSwitcher: FC<Props> = (props) => {
             className={`btn shadow-none`}
             data-te-toggle='tooltip'
             title='Preview Disabled'
-            href={`/${
-              envId ? envId : defaultEnvId
-            }/api/preview?secret=mySuperSecret&slug=${encodeURIComponent(
+            href={`/api/preview?secret=mySuperSecret&slug=${encodeURIComponent(
               router.asPath
             )}`}
           >

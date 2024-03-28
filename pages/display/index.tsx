@@ -1,19 +1,14 @@
-import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FC } from 'react';
 import {
-  getArticlesForListing, getEventsForListing, getHomepage,
-} from '../../../lib/services/kontentClient';
-import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
-import {
-  getEnvIdFromRouteParams,
-  getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
-import { PreviewContext } from '../../../components/contexts/PreviewContext';
-import { Event, taxonomies } from '../../../models';
-import { EventItem } from '../../../components/listingPage/EventItem';
-import { useSmartLink } from '../../../lib/useSmartLink';
+  getEventsForListing, getHomepage,
+} from '../../lib/services/kontentClient';
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { defaultEnvId, defaultPreviewKey, siteCodename } from '../../lib/utils/env';
+import { PreviewContext } from '../../components/contexts/PreviewContext';
+import { Event, taxonomies } from '../../models';
+import { EventItem } from '../../components/listingPage/EventItem';
+import { useSmartLink } from '../../lib/useSmartLink';
 import Image from 'next/image';
 
 type Props = Readonly<{
@@ -61,8 +56,8 @@ export const Products: FC<Props> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  const envId = getEnvIdFromRouteParams(context);
-  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+  const envId = defaultEnvId;
+  const previewApiKey = defaultPreviewKey;
 
   const events = await getEventsForListing(
     { envId, previewApiKey },
@@ -87,17 +82,6 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       language: context.locale as string,
       logo: homepage ? homepage?.elements.logo.value[0]?.url : ""
     },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: { envId: defaultEnvId },
-      },
-    ],
-    fallback: 'blocking',
   };
 };
 

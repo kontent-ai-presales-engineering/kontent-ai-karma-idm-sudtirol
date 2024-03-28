@@ -2,30 +2,26 @@ import { ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { CourseItem } from '../../../components/listingPage/CourseItem';
-import { AppPage } from '../../../components/shared/ui/appPage';
-import { CoursesPageSize } from '../../../lib/constants/paging';
+import { CourseItem } from '../../components/listingPage/CourseItem';
+import { AppPage } from '../../components/shared/ui/appPage';
+import { CoursesPageSize } from '../../lib/constants/paging';
 import {
   getDefaultMetadata,
   getHomepage,
   getItemBySlug,
   getCoursesForListing,
-} from '../../../lib/services/kontentClient';
-import { reservedListingSlugs, resolveUrlPath } from '../../../lib/routing';
-import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { changeUrlQueryString } from '../../../lib/utils/changeUrlQueryString';
-import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
+} from '../../lib/services/kontentClient';
+import { reservedListingSlugs, resolveUrlPath } from '../../lib/routing';
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { changeUrlQueryString } from '../../lib/utils/changeUrlQueryString';
+import { defaultEnvId, defaultPreviewKey, siteCodename } from '../../lib/utils/env';
 import {
   Course,
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
   contentTypes,
-} from '../../../models';
-import {
-  getEnvIdFromRouteParams,
-  getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
+} from '../../models';
 
 type Props = Readonly<{
   page: WSL_Page;
@@ -247,8 +243,8 @@ export const Courses: FC<Props> = (props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
-  const envId = getEnvIdFromRouteParams(context);
-  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+  const envId = defaultEnvId;
+  const previewApiKey = defaultPreviewKey;
 
   const page = await getItemBySlug<WSL_Page>(
     { envId, previewApiKey },
@@ -290,17 +286,6 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
       language: context.locale as string,
       homepage: homepage,
     },
-  };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: { envId: defaultEnvId },
-      },
-    ],
-    fallback: 'blocking',
   };
 };
 

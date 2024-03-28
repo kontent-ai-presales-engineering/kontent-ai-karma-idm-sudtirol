@@ -1,31 +1,27 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { AppPage } from '../../components/shared/ui/appPage';
+import { AppPage } from '../components/shared/ui/appPage';
 import {
   getDefaultMetadata,
   getHomepage,
   getItemByUrlSlug,
   getPagesSlugs,
-} from '../../lib/services/kontentClient';
-import { ValidCollectionCodename } from '../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../lib/utils/env';
+} from '../lib/services/kontentClient';
+import { ValidCollectionCodename } from '../lib/types/perCollection';
+import { defaultEnvId, defaultPreviewKey, siteCodename } from '../lib/utils/env';
 import {
   createElementSmartLink,
   createFixedAddSmartLink,
-} from '../../lib/utils/smartLinkUtils';
+} from '../lib/utils/smartLinkUtils';
 import {
   contentTypes,
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
-} from '../../models';
-import { RichTextElement } from '../../components/shared/richText/RichTextElement';
-import {
-  getEnvIdFromRouteParams,
-  getPreviewApiKeyFromPreviewData,
-} from '../../lib/utils/pageUtils';
-import { reservedListingSlugs } from '../../lib/routing';
-import { useLivePreview } from '../../components/shared/contexts/LivePreview';
+} from '../models';
+import { RichTextElement } from '../components/shared/richText/RichTextElement';
+import { reservedListingSlugs } from '../lib/routing';
+import { useLivePreview } from '../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   page: WSL_Page;
@@ -79,14 +75,15 @@ const Page: NextPage<Props> = ({
 export const getStaticProps: GetStaticProps<Props, IParams> = async (
   context
 ) => {
+  console.log("getStaticProps")
   const slug = context.params?.slug;
   if (!slug) {
     return {
       notFound: true,
     };
   }
-  const envId = getEnvIdFromRouteParams(context);
-  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+  const envId = defaultEnvId;
+  const previewApiKey = defaultPreviewKey;
 
   const homepage = await getHomepage(
     { envId, previewApiKey },
@@ -131,7 +128,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     .filter((item) => item != reservedListingSlugs.articles)
     .filter((item) => item != reservedListingSlugs.products)
     .filter((item) => item != reservedListingSlugs.courses)
-    .map((slug) => ({ params: { envId: defaultEnvId, slug } }));
+    .map((slug) => ({ params: { slug } }));
   return {
     paths,
     fallback: 'blocking',

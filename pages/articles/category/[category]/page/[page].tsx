@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { ArticlePageSize } from '../../../../../../lib/constants/paging';
+import { ArticlePageSize } from '../../../../../lib/constants/paging';
 import {
   getArticleTaxonomy,
   getArticlesCountByCategory,
@@ -9,38 +9,34 @@ import {
   getHomepage,
   getItemBySlug,
   getItemsTotalCount,
-} from '../../../../../../lib/services/kontentClient';
+} from '../../../../../lib/services/kontentClient';
 import {
   ResolutionContext,
   reservedListingSlugs,
   resolveUrlPath,
-} from '../../../../../../lib/routing';
-import { ValidCollectionCodename } from '../../../../../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../../../../../lib/utils/env';
+} from '../../../../../lib/routing';
+import { ValidCollectionCodename } from '../../../../../lib/types/perCollection';
+import { defaultEnvId, defaultPreviewKey, siteCodename } from '../../../../../lib/utils/env';
 import {
   Article,
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
   contentTypes,
-} from '../../../../../../models';
+} from '../../../../../models';
 import { NextRouter, useRouter } from 'next/router';
 import Link from 'next/link';
-import { AppPage } from '../../../../../../components/shared/ui/appPage';
-import { useSiteCodename } from '../../../../../../components/shared/siteCodenameContext';
+import { AppPage } from '../../../../../components/shared/ui/appPage';
+import { useSiteCodename } from '../../../../../components/shared/siteCodenameContext';
 import { ITaxonomyTerms } from '@kontent-ai/delivery-sdk';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
-import { ArticleItem } from '../../../../../../components/listingPage/ArticleItem';
+import { ArticleItem } from '../../../../../components/listingPage/ArticleItem';
 import {
   mainColorBgClass,
   mainColorBorderClass,
   mainColorHoverClass,
-} from '../../../../../../lib/constants/colors';
-import {
-  getEnvIdFromRouteParams,
-  getPreviewApiKeyFromPreviewData,
-} from '../../../../../../lib/utils/pageUtils';
-import { useLivePreview } from '../../../../../../components/shared/contexts/LivePreview';
+} from '../../../../../lib/constants/colors';
+import { useLivePreview } from '../../../../../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   siteCodename: ValidCollectionCodename;
@@ -345,8 +341,8 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   const pageNumber =
     !pageURLParameter || isNaN(+pageURLParameter) ? 1 : +pageURLParameter;
 
-  const envId = getEnvIdFromRouteParams(context);
-  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+    const envId = defaultEnvId;
+    const previewApiKey = defaultPreviewKey;
 
   const articles = await getArticlesForListing(
     { envId, previewApiKey },

@@ -1,35 +1,31 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { FC } from 'react';
-import { HeroImage } from '../../../components/landingPage/ui/heroImage';
-import { RichTextElement } from '../../../components/shared/richText/RichTextElement';
-import { AppPage } from '../../../components/shared/ui/appPage';
-import { mainColorBgClass } from '../../../lib/constants/colors';
+import { HeroImage } from '../../components/landingPage/ui/heroImage';
+import { RichTextElement } from '../../components/shared/richText/RichTextElement';
+import { AppPage } from '../../components/shared/ui/appPage';
+import { mainColorBgClass } from '../../lib/constants/colors';
 import {
   getAllArticles,
   getArticleBySlug,
   getDefaultMetadata,
   getHomepage,
-} from '../../../lib/services/kontentClient';
-import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { formatDate } from '../../../lib/utils/dateTime';
-import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
+} from '../../lib/services/kontentClient';
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { formatDate } from '../../lib/utils/dateTime';
+import { defaultEnvId, defaultPreviewKey, siteCodename } from '../../lib/utils/env';
 import {
   Article,
   SEOMetadata,
   WSL_Page,
   WSL_WebSpotlightRoot,
   contentTypes,
-} from '../../../models';
+} from '../../models';
 import {
   createElementSmartLink,
   createItemSmartLink,
-} from '../../../lib/utils/smartLinkUtils';
+} from '../../lib/utils/smartLinkUtils';
 import Image from 'next/image';
-import {
-  getEnvIdFromRouteParams,
-  getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
-import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
+import { useLivePreview } from '../../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   article: Article;
@@ -199,9 +195,8 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
   if (!slug) {
     return { notFound: true };
   }
-
-  const envId = getEnvIdFromRouteParams(context);
-  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+  const envId = defaultEnvId;
+  const previewApiKey = defaultPreviewKey;
 
   const article = await getArticleBySlug(
     { envId, previewApiKey },

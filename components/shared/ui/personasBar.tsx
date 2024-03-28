@@ -3,9 +3,9 @@ import { ITaxonomyTerms } from "@kontent-ai/delivery-sdk";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getPersonas } from "../../../lib/services/kontentClient";
-import { getEnvIdFromCookie, getPersonaFromCookie } from "../../../lib/utils/pageUtils";
 import { defaultEnvId } from "../../../lib/utils/env";
-import { personaCookieName } from "../../../lib/constants/cookies";
+import { defaultCookieOptions, personaCookieName } from "../../../lib/constants/cookies";
+import { getCookie } from "cookies-next";
 
 type Props = Readonly<{
     display: string;
@@ -14,10 +14,10 @@ type Props = Readonly<{
 export const PersonasBar: FC<Props> = props => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const envId = getEnvIdFromCookie() ?? defaultEnvId;
-    const personaId = getPersonaFromCookie();
+    
+    const personaId = getCookie(personaCookieName, defaultCookieOptions);
     const [selectedPersona, setSelectedPersona] = useState<ITaxonomyTerms>();
+    const envId = defaultEnvId;
 
     const [personas, setPersonas] = useState<ITaxonomyTerms[]>([]);
     useEffect(() => {

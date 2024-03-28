@@ -2,34 +2,30 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import { ParsedUrlQuery } from 'querystring';
 import { FC } from 'react';
-import { AppPage } from '../../../components/shared/ui/appPage';
+import { AppPage } from '../../components/shared/ui/appPage';
 import {
   getDefaultMetadata,
   getProductDetail,
   getProductItemsWithSlugs,
-} from '../../../lib/services/kontentClient';
-import { ValidCollectionCodename } from '../../../lib/types/perCollection';
-import { defaultEnvId, siteCodename } from '../../../lib/utils/env';
-import { createElementSmartLink } from '../../../lib/utils/smartLinkUtils';
+} from '../../lib/services/kontentClient';
+import { ValidCollectionCodename } from '../../lib/types/perCollection';
+import { defaultEnvId, defaultPreviewKey, siteCodename } from '../../lib/utils/env';
+import { createElementSmartLink } from '../../lib/utils/smartLinkUtils';
 import {
   WSL_WebSpotlightRoot,
   contentTypes,
   Product,
   SEOMetadata,
-} from '../../../models';
-import { getHomepage } from '../../../lib/services/kontentClient';
-import { RichTextElement } from '../../../components/shared/richText/RichTextElement';
+} from '../../models';
+import { getHomepage } from '../../lib/services/kontentClient';
+import { RichTextElement } from '../../components/shared/richText/RichTextElement';
 import {
   mainColorBgClass,
   mainColorTextClass,
   mainColorHoverClass,
-} from '../../../lib/constants/colors';
+} from '../../lib/constants/colors';
 import Link from 'next/link';
-import {
-  getEnvIdFromRouteParams,
-  getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
-import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
+import { useLivePreview } from '../../components/shared/contexts/LivePreview';
 
 type Props = Readonly<{
   product: Product;
@@ -60,8 +56,8 @@ export const getStaticProps: GetStaticProps<Props, IParams> = async (
 ) => {
   const slug = context.params?.slug;
   const language = context.locale as string;
-  const envId = getEnvIdFromRouteParams(context);
-  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+  const envId = defaultEnvId;
+  const previewApiKey = defaultPreviewKey;
 
   if (!slug) {
     return { notFound: true };

@@ -3,17 +3,13 @@ import { FC } from 'react';
 import {
   getAllBanners,
   getBannerBySlug,
-} from '../../../lib/services/kontentClient';
-import { defaultEnvId } from '../../../lib/utils/env';
+} from '../../lib/services/kontentClient';
+import { defaultEnvId, defaultPreviewKey } from '../../lib/utils/env';
 import {
   ImageContainer,
-} from '../../../models';
-import {
-  getEnvIdFromRouteParams,
-  getPreviewApiKeyFromPreviewData,
-} from '../../../lib/utils/pageUtils';
-import { useLivePreview } from '../../../components/shared/contexts/LivePreview';
-import { ImageContainerComponent } from '../../../components/shared/ImageContainer';
+} from '../../models';
+import { useLivePreview } from '../../components/shared/contexts/LivePreview';
+import { ImageContainerComponent } from '../../components/shared/ImageContainer';
 
 type Props = Readonly<{
   banner: ImageContainer;
@@ -46,9 +42,8 @@ export const getStaticProps: GetStaticProps<Props, { slug: string }> = async (
   if (!slug) {
     return { notFound: true };
   }
-
-  const envId = getEnvIdFromRouteParams(context);
-  const previewApiKey = getPreviewApiKeyFromPreviewData(context.previewData);
+  const envId = defaultEnvId;
+  const previewApiKey = defaultPreviewKey;
 
   const banner = await getBannerBySlug(
     { envId, previewApiKey },
