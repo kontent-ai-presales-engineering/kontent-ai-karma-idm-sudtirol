@@ -191,10 +191,6 @@ export const createDefaultResolvers = (
           return (
             <PanelListingComponent item={componentItem as PanelListing} />
           );
-        case contentTypes.team_section.codename:
-          return (
-            <TeamSectionComponent item={componentItem as TeamSection} />
-          );
         default:
           return (
             <BuildError>
