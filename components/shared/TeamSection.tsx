@@ -35,7 +35,7 @@ export const TeamSectionComponent: FC<Props> = (props) => {
             contentTypes.team_section.elements.team_members.codename
           )}
           {...createFixedAddSmartLink('end')}>
-          {props.item.elements.teamMembers.linkedItems ? props.item.elements.teamMembers.linkedItems?.map((teamMember) => (
+          {props.item.elements.teamMembers.value ? props.item.elements.teamMembers.linkedItems?.map((teamMember) => (
             <li
               key={teamMember.system.id}
               {...createItemSmartLink(
