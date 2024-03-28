@@ -21,9 +21,9 @@ export const TeamSectionComponent: FC<Props> = (props) => {
       <div className="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-            {...createElementSmartLink(contentTypes.team_section.elements.title.codename)}>{props.item.elements.title.value}</h2>
+            {...createElementSmartLink(contentTypes.team_section.elements.title?.codename)}>{props.item.elements.title?.value}</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600"
-            {...createElementSmartLink(contentTypes.team_section.elements.description.codename)}>
+            {...createElementSmartLink(contentTypes.team_section.elements.description?.codename)}>
             <RichTextElement
               element={props.item.elements.description}
               isInsideTable={false}
