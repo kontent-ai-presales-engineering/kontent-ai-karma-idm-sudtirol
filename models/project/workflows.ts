@@ -75,6 +75,11 @@ export const workflows = {
                 codename: 'translation',
                 id: '51417e95-8f5c-4108-bef0-0464e4d90d63'
             },
+            proof_reading_translation: {
+                name: 'Proof reading translation',
+                codename: 'proof_reading_translation',
+                id: '627c18e4-8ce7-43af-85a2-248d60d0affa'
+            },
             approval: {
                 name: 'Approval',
                 codename: 'approval',

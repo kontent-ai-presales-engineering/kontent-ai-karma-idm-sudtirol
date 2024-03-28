@@ -2557,6 +2557,53 @@ export const contentTypes = {
     },
 
     /**
+     * Team Section
+     */
+    team_section: {
+        codename: 'team_section',
+        id: '37ddba68-e74e-4086-85ff-c96b03f20b47',
+        externalId: undefined,
+        name: 'Team Section',
+        elements: {
+            /**
+             * Description (rich_text)
+             */
+            description: {
+                codename: 'description',
+                id: '5778afcd-4218-4c7e-82e2-2b0e3a1d929c',
+                externalId: undefined,
+                name: 'Description',
+                required: false,
+                type: 'rich_text'
+            },
+
+            /**
+             * Team members (modular_content)
+             */
+            team_members: {
+                codename: 'team_members',
+                id: '7649fa43-96db-43be-8ccd-38613d41aab5',
+                externalId: undefined,
+                name: 'Team members',
+                required: false,
+                type: 'modular_content'
+            },
+
+            /**
+             * Title (text)
+             */
+            title: {
+                codename: 'title',
+                id: '9a6ab5ae-9503-4c11-bc82-1add3692a978',
+                externalId: undefined,
+                name: 'Title',
+                required: true,
+                type: 'text'
+            }
+        }
+    },
+
+    /**
      * Testimonial
      */
     testimonial: {

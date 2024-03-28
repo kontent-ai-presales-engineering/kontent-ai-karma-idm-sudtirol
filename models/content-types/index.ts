@@ -24,5 +24,6 @@ export * from './product';
 export * from './productListing';
 export * from './robotsTxt';
 export * from './siteConfiguration';
+export * from './teamSection';
 export * from './testimonial';
 export * from './youTubeEmbed';
