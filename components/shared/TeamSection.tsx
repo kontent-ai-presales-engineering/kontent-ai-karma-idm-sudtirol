@@ -35,7 +35,7 @@ export const TeamSectionComponent: FC<Props> = (props) => {
             contentTypes.team_section.elements.team_members.codename
           )}
           {...createFixedAddSmartLink('end')}>
-          {props.item.elements.teamMembers.value ? props.item.elements.teamMembers.linkedItems?.map((teamMember) => (
+          {props.item.elements.teamMembers?.value ? props.item.elements.teamMembers.linkedItems?.map((teamMember) => (
             <li
               key={teamMember.system.id}
               {...createItemSmartLink(
@@ -43,7 +43,7 @@ export const TeamSectionComponent: FC<Props> = (props) => {
                 teamMember.system.name
               )}>
               <div className="flex items-center gap-x-6">
-                <img className="h-16 w-16 rounded-full" src={teamMember.elements.photograph.value[0]?.url} alt={teamMember.elements.photograph.value[0]?.description} />
+                <img className="h-16 w-16 rounded-full" src={teamMember.elements.photograph?.value[0]?.url} alt={teamMember.elements.photograph?.value[0]?.description} />
                 <div>
                   <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">{teamMember.elements.firstName?.value} {teamMember.elements.lastName?.value}</h3>
                   <p className="text-sm font-semibold leading-6 text-indigo-600">{teamMember.elements.occupation?.value}</p>
